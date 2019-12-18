@@ -1,41 +1,14 @@
-#define LED 6
-#define PAINIKE 5
-#define TASO1 100
-#define TASO2 40
-#define LEDON 255
-#define LEDOFF 0
-#define FILTER 20
-int oldState; // Painikkeen tilojen seurantaa varten
-int valaistusTaso = LEDOFF;
+#include "fikkari.h"
+
+fikkari T1 (5, 6); //luodaan ilmentymä
+
 void setup () {
-   pinMode (LED, OUTPUT);
-   pinMode (PAINIKE, INPUT_PULLUP);
-   oldState = digitalRead (PAINIKE); //alustetaan "muistijälki"
-   Serial.begin(9600);
+
 }
 
-bool buttonPressed () {
-  bool retVal = false;
-  int x = digitalRead (PAINIKE);
-  if (x == LOW && oldState == HIGH) { // Etsitään painikkeen painallus
-    retVal = true;
-  }
-  oldState = x;
-  delay (FILTER);
-  return retVal;
-}
-void changeState(){
-       Serial.println ("Khyy");
-      switch (valaistusTaso){
-        case LEDOFF:valaistusTaso=LEDON;break;
-        case LEDON:valaistusTaso=TASO1;break;
-        case TASO1:valaistusTaso=TASO2;break;
-        case TASO2:valaistusTaso=LEDOFF;break;
-      }
-      analogWrite (LED, valaistusTaso);
-}
+
+
 void loop() {
-  if (buttonPressed() ){
-     changeState();
-  }
+ T1.handle();
+
 }
