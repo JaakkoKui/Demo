@@ -5,7 +5,7 @@
 
 #define TASO1 100
 #define TASO2 40
-#define LEDON 255
+#define LEDON 180
 #define LEDOFF 0
 #define FILTER 20
 
